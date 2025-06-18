@@ -8,9 +8,10 @@ class UI{
     JRadioButton c2 = new JRadioButton("个人的", true);
     JTextField textList1[] = new JTextField[inputNum];
     JTextField textList2[] = new JTextField[inputNum];
-    String resultPriList[] = {"一等奖", "二等奖", "三等奖", "四等奖", "五等奖", "六等奖"};
+    String resultPriList[] = {"一等奖", "二等奖", "三等奖", "四等奖", "五等奖", "六等奖","总中奖次数", "总中奖率", "总次数"};
     int resultNum = resultPriList.length;
     JTextField resultText[] = new JTextField[resultNum];
+    Timer timer = new Timer(1, null);
     public UI(){
 
         Font defaultFont = Font.decode(null);
@@ -18,7 +19,7 @@ class UI{
 
         //生成框架
         JFrame frame = new JFrame("李炜豪_20230154005");
-        frame.setSize(500, 500);
+        frame.setSize(800, 500);
         frame.setLayout(new GridLayout(5,1));
 
         //生成面板,设置布局
@@ -27,9 +28,10 @@ class UI{
         JPanel p2_1 = new JPanel(new GridLayout(1,7));
         JPanel p2_2 = new JPanel(new GridLayout(1,7));
         JPanel p3 = new JPanel(new FlowLayout());
-        JPanel p4 = new JPanel(new GridLayout(2,1));
+        JPanel p4 = new JPanel(new GridLayout(3,1));
         JPanel p4_1 = new JPanel(new GridLayout(1,6));
         JPanel p4_2 = new JPanel(new GridLayout(1,6));
+        JPanel p4_3 = new JPanel(new GridLayout(1,6));
         JPanel p5 = new JPanel(new FlowLayout());
 
 
@@ -90,9 +92,9 @@ class UI{
             p3.add(buttonList[i]);
         }
         //监听器
-        buttonList[0].addActionListener(new ActionStop(this));
-        buttonList[1].addActionListener(new ActionStart(this));
-        buttonList[2].addActionListener(new ActionRes(this));
+        buttonList[0].addActionListener(new ActionStop(this, timer));
+        buttonList[1].addActionListener(new ActionStart(this, timer));
+        buttonList[2].addActionListener(new ActionRes(this, timer));
         frame.add(p3);
 
 
@@ -107,13 +109,18 @@ class UI{
                 p4_1.add(resultProLabel[i]);
                 p4_1.add(resultText[i]);
             }
-            else{
+            else if(i<6){
                 p4_2.add(resultProLabel[i]);
                 p4_2.add(resultText[i]);
+            }
+            else{
+                p4_3.add(resultProLabel[i]);
+                p4_3.add(resultText[i]);
             }
         }
         p4.add(p4_1);
         p4.add(p4_2);
+        p4.add(p4_3);
         frame.add((p4));
         frame.add(p5);
 

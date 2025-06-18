@@ -13,7 +13,7 @@ class Action{
     }
 
     void clearRes(){
-        for (int i=0; i<6; i++){
+        for (int i=0; i<9; i++){
             zhongjiangUi.resultText[i].setText("");
         }
     }

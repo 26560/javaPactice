@@ -1,15 +1,17 @@
 import java.util.Random;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.Arrays;
 
 class ActionStart extends Action implements ActionListener{    
     Random rand = new Random();
     int z[] = new int[6];
-    Timer timer = new Timer(1, null);
-    int tryNum = 0;
+    float tryNum = 1;
+    Timer timer;
 
-    public ActionStart(UI zhongjiangUi){
+    public ActionStart(UI zhongjiangUi, Timer timer){
         super(zhongjiangUi);
+        this.timer = timer;
     }
 
     public void actionPerformed(ActionEvent e){
@@ -31,9 +33,9 @@ class ActionStart extends Action implements ActionListener{
     }
 
     public void start(){
-        int num, inputNum, equalNumRed, equalNumBlue;
+        int num, inputNum, equalNumRed, equalNumBlue, zz;
         int[] randNumStr = new int[zhongjiangUi.inputNum];
-        equalNumBlue = equalNumRed = 0;
+        equalNumBlue = equalNumRed = zz = 0;
         //根据模式判断是否生成输入数
         if (mode == 0){
             for (int i=0; i<zhongjiangUi.inputNum-1; i++){
@@ -102,8 +104,12 @@ class ActionStart extends Action implements ActionListener{
         }
 
         for (int i=0; i<6; i++){
-            zhongjiangUi.resultText[i].setText(String.valueOf(z[i]));
-          }
+            zhongjiangUi.resultText[i].setText(String.valueOf(z[i]) + "(" + String.valueOf(z[i]/tryNum) + "%" + ")");
+        }
+        zz = Arrays.stream(z).sum();
+        zhongjiangUi.resultText[6].setText(String.valueOf(zz));
+        zhongjiangUi.resultText[7].setText(String.valueOf(zz/tryNum + "%"));
+        zhongjiangUi.resultText[8].setText(String.valueOf(tryNum));
         zhongjiangUi.c1.setEnabled(true);
         zhongjiangUi.c2.setEnabled(true);
     }
