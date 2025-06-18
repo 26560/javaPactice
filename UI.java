@@ -90,8 +90,9 @@ class UI{
             p3.add(buttonList[i]);
         }
         //监听器
+        buttonList[0].addActionListener(new ActionStop(this));
         buttonList[1].addActionListener(new ActionStart(this));
-        buttonList[2].addActionListener(new ActionStop(this));
+        buttonList[2].addActionListener(new ActionRes(this));
         frame.add(p3);
 
 
