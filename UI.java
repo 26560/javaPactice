@@ -9,6 +9,10 @@ class UI{
     int resultNum = resultPriList.length;
     TextField resultText[] = new TextField[resultNum];
     public UI(){
+
+        Font defaultFont = Font.decode(null);
+        System.out.println(defaultFont);
+
         //生成框架
         Frame frame = new Frame("李炜豪_20230154005");
         frame.setSize(500, 500);
