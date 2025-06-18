@@ -1,12 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+
 
 class UI{
-    int inputNum = 6;
+    int inputNum = 8;
     JTextField textList1[] = new JTextField[inputNum];
     JTextField textList2[] = new JTextField[inputNum];
-    String resultPriList[] = {"6中3", "6中4", "6中5", "6中6", "Drawing", "Years"};
+    String resultPriList[] = {"一等奖", "二等奖", "三等奖", "四等奖", "五等奖", "六等奖"};
     int resultNum = resultPriList.length;
     JTextField resultText[] = new JTextField[resultNum];
     public UI(){
@@ -50,14 +50,27 @@ class UI{
         p2_1.add(l1);
         p2_2.add(l2);
         
+        int redNum = 7;
         for (int i=0; i<inputNum; i++){
             textList1[i] = new JTextField(1);
+            if (i<redNum){
+                textList1[i].setBackground(Color.red);
+            }
+            else{
+                textList1[i].setBackground(Color.blue);
+            }
             p2_1.add(textList1[i]);
         }
 
         for (int i=0; i<inputNum; i++){
             textList2[i] = new JTextField(1);
             textList2[i].setEnabled(false);
+            if (i<redNum){
+                textList2[i].setBackground(Color.red);
+            }
+            else{
+                textList2[i].setBackground(Color.blue);
+            }
             p2_2.add(textList2[i]);
         }
         p2.add(p2_1);
@@ -102,7 +115,7 @@ class UI{
         frame.add(p5);
 
 
-        //关闭设置
+        //关闭窗口
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setVisible(true);
