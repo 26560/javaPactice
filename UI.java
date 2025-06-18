@@ -4,6 +4,8 @@ import java.awt.*;
 
 class UI{
     int inputNum = 8;
+    JRadioButton c1 = new JRadioButton("快速选择", false);
+    JRadioButton c2 = new JRadioButton("个人的", true);
     JTextField textList1[] = new JTextField[inputNum];
     JTextField textList2[] = new JTextField[inputNum];
     String resultPriList[] = {"一等奖", "二等奖", "三等奖", "四等奖", "五等奖", "六等奖"};
@@ -34,8 +36,8 @@ class UI{
 
         //顶部复选框
         ButtonGroup cg = new ButtonGroup();
-        JRadioButton c1 = new JRadioButton("快速选择", false);
-        JRadioButton c2 = new JRadioButton("个人的", true);
+        c1.addActionListener(new selectQuick(this));
+        c2.addActionListener(new selectPerson(this));
         cg.add(c1);
         cg.add(c2);
         p1.add(c1);

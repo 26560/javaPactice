@@ -3,6 +3,7 @@ import java.util.Random;
 
 class Action{
     UI zhongjiangUi = null;
+    static byte mode = 1;
     
     public Action(UI zhongjiangUi){
         this.zhongjiangUi = zhongjiangUi;
@@ -37,15 +38,31 @@ class ActionStart extends Action implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         int num, inputNum, equalNumRed, equalNumBlue;
-        equalNumBlue = equalNumRed = 0;
         int[] randNumStr = new int[zhongjiangUi.inputNum];
         clearRes();
-        for (int i=0; i<zhongjiangUi.inputNum; i++){
-            num = rand.nextInt(2)+1;
+        zhongjiangUi.c1.setEnabled(false);
+        zhongjiangUi.c2.setEnabled(false);
+        for (int tryNum=0; tryNum<10000; tryNum++){
+        equalNumBlue = equalNumRed = 0;
+        //根据模式判断是否生成输入数
+        if (mode == 0){
+            for (int i=0; i<zhongjiangUi.inputNum-1; i++){
+                zhongjiangUi.textList1[i].setText(String.valueOf(rand.nextInt(33)+1));
+            }
+            zhongjiangUi.textList1[zhongjiangUi.inputNum-1].setText(String.valueOf(rand.nextInt(16)+1));
+        }
+
+        //设置得奖球
+        for (int i=0; i<zhongjiangUi.inputNum - 1; i++){
+            num = rand.nextInt(36)+1;
             zhongjiangUi.textList2[i].setText(String.valueOf(num));
             randNumStr[i] = num;
         }
+        num = rand.nextInt(16)+1;
+        zhongjiangUi.textList2[zhongjiangUi.inputNum - 1].setText(String.valueOf(num));
+        randNumStr[zhongjiangUi.inputNum - 1] = num;
         
+        //计算中奖数量
         for (int i=0; i<zhongjiangUi.inputNum-1; i++){
             inputNum = Integer.valueOf(zhongjiangUi.textList1[i].getText());
             for (int j=0; j<zhongjiangUi.inputNum - 1; j++){
@@ -59,9 +76,6 @@ class ActionStart extends Action implements ActionListener{
         if (Integer.valueOf(zhongjiangUi.textList1[zhongjiangUi.inputNum-1].getText()) == randNumStr[zhongjiangUi.inputNum - 1]){
             equalNumBlue = 1;
         }
-
-        System.out.println(equalNumRed);
-        System.out.println(equalNumBlue);
 
         switch (equalNumRed) {
             case 6:
@@ -99,7 +113,10 @@ class ActionStart extends Action implements ActionListener{
 
         for (int i=0; i<6; i++){
             zhongjiangUi.resultText[i].setText(String.valueOf(z[i]));
+          }
         }
+        zhongjiangUi.c1.setEnabled(true);
+        zhongjiangUi.c2.setEnabled(true);
     }
 }
 
