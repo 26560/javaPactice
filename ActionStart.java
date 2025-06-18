@@ -6,6 +6,7 @@ class ActionStart extends Action implements ActionListener{
     Random rand = new Random();
     int z[] = new int[6];
     Timer timer = new Timer(1, null);
+    int tryNum = 0;
 
     public ActionStart(UI zhongjiangUi){
         super(zhongjiangUi);
@@ -15,7 +16,9 @@ class ActionStart extends Action implements ActionListener{
         timer.start();
         timer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int tryNum = 0;
+                clearRes();
+                zhongjiangUi.c1.setEnabled(false);
+                zhongjiangUi.c2.setEnabled(false);
                 start();
                 if (tryNum++ >= 10000) {
                     timer.stop();
@@ -30,10 +33,6 @@ class ActionStart extends Action implements ActionListener{
     public void start(){
         int num, inputNum, equalNumRed, equalNumBlue;
         int[] randNumStr = new int[zhongjiangUi.inputNum];
-        clearRes();
-        zhongjiangUi.c1.setEnabled(false);
-        zhongjiangUi.c2.setEnabled(false);
-        for (int tryNum=0; tryNum<10000; tryNum++){
         equalNumBlue = equalNumRed = 0;
         //根据模式判断是否生成输入数
         if (mode == 0){
@@ -105,7 +104,6 @@ class ActionStart extends Action implements ActionListener{
         for (int i=0; i<6; i++){
             zhongjiangUi.resultText[i].setText(String.valueOf(z[i]));
           }
-        }
         zhongjiangUi.c1.setEnabled(true);
         zhongjiangUi.c2.setEnabled(true);
     }

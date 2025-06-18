@@ -6,6 +6,7 @@ class ActionStop extends ActionStart{
     }
 
     public void actionPerformed(ActionEvent e){
+        System.out.println("Stopping the timer...");
         super.timer.stop();
     }
 }
